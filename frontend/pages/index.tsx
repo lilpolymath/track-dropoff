@@ -7,13 +7,13 @@ type Props = {
   products: ProductProps[];
 };
 
-const Products: React.FC<Props> = (props) => {
+const Products: React.FC<Props> = ({ products }) => {
   return (
     <Layout>
       <div className='page'>
         <h1>Products</h1>
         <main>
-          {props.products?.map((product) => (
+          {products?.map((product) => (
             <div key={product.id} className='product'>
               <Product product={product} />
             </div>
