@@ -4,12 +4,22 @@ import ReactMarkdown from 'react-markdown';
 import Layout from '../../components/Layout';
 import Router from 'next/router';
 import { ProductProps } from '../../components/Product';
-import { FAKESTORE_BASE_URL } from '../../utils/constants';
+import { FAKESTORE_BASE_URL, BASE_URL } from '../../utils/constants';
 
 const Post: React.FC<ProductProps> = ({ ...props }) => {
+  const email = 'test@random.io';
+
   const addToCart = async (props: ProductProps): Promise<void> => {
     try {
-      const body = { email, product: { ...props } };
+      const body = {
+        email,
+        product: {
+          title: props.title,
+          image: props.image,
+          price: props.price,
+          description: props.description,
+        },
+      };
       await fetch(`${BASE_URL}/cart`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,7 +33,15 @@ const Post: React.FC<ProductProps> = ({ ...props }) => {
 
   const removeFromCart = async (id: number): Promise<void> => {
     try {
-      const body = { email, product: { ...props } };
+      const body = {
+        email,
+        product: {
+          title: props.title,
+          image: props.image,
+          price: props.price,
+          description: props.description,
+        },
+      };
       await fetch(`${BASE_URL}/cart`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
@@ -54,9 +72,11 @@ const Post: React.FC<ProductProps> = ({ ...props }) => {
           background: white;
           padding: 2rem;
         }
-        .actions {
-          margin-top: 2rem;
+
+        div {
+          width: 100%;
         }
+
         button {
           background: #ececec;
           border: 0;
@@ -64,8 +84,8 @@ const Post: React.FC<ProductProps> = ({ ...props }) => {
           border-radius: 0.125rem;
           padding: 1rem 2rem;
         }
-        button {
-          margin-left: 1rem;
+        button + button {
+          margin-top: 1rem;
         }
       `}</style>
     </Layout>

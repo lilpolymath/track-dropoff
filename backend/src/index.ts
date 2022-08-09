@@ -14,7 +14,7 @@ app.get('/all', async (req, res) => {
 });
 
 app.get('/products', async (req, res) => {
-  const products = await prisma.products.findMany();
+  const products = await prisma.product.findMany();
   res.json(products);
 
   res.json([]);
