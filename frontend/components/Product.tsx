@@ -7,23 +7,32 @@ export type ProductProps = {
   title: string;
   image: string;
   price: number;
+  description: string;
 };
 
-const Post: React.FC<{ post: ProductProps }> = ({ post }) => {
+const Product: React.FC<{ product: ProductProps }> = ({ product }) => {
   return (
-    <div onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-      {JSON.stringify(post)}
-      {/* <h2>{post.title}</h2>
-      <small>By {authorName}</small>
-      <ReactMarkdown children={post.content} />
+    <div onClick={() => Router.push('/p/[id]', `/p/${product.id}`)}>
+      <img src={product.image} alt={product.title} />
+      <h2>{product.title}</h2>
+      <small>Price: ${product.price}</small>
+      <ReactMarkdown children={product.description} />
+
       <style jsx>{`
         div {
           color: inherit;
           padding: 2rem;
         }
-      `}</style> */}
+
+        img {
+          max-height: 300px;
+          object-fit: contain;
+          width: 100%;
+          height: auto;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default Post;
+export default Product;

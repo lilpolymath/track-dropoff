@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = (props) => (
-  <main>
+  <main className='container'>
     <Header />
     <div className='layout'>{props.children}</div>
     <style jsx global>{`
@@ -41,7 +41,7 @@ const Layout: React.FC<Props> = (props) => (
       }
     `}</style>
     <style jsx>{`
-      main {
+      .container {
         padding: 0 1rem;
         max-width: 900px;
         margin: auto;

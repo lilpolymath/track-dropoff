@@ -16,7 +16,7 @@ const Products: React.FC<Props> = ({ products }) => {
     <Layout>
       <div className='page'>
         <h1>Products</h1>
-        <main>
+        <main className='products'>
           {products?.map((product) => (
             <div key={product.id} className='product'>
               <Product product={product} />
@@ -34,8 +34,10 @@ const Products: React.FC<Props> = ({ products }) => {
           box-shadow: 1px 1px 3px #aaa;
         }
 
-        .product + .product {
-          margin-top: 2rem;
+        .products {
+          display: grid;
+          gap: 2rem;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
       `}</style>
     </Layout>
