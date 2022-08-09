@@ -12,7 +12,7 @@ export type ProductProps = {
 
 const Product: React.FC<{ product: ProductProps }> = ({ product }) => {
   return (
-    <div onClick={() => Router.push('/p/[id]', `/p/${product.id}`)}>
+    <div onClick={() => Router.push('/product/[id]', `/product/${product.id}`)}>
       <img src={product.image} alt={product.title} />
       <h2>{product.title}</h2>
       <small>Price: ${product.price}</small>
