@@ -1,9 +1,4 @@
-// Track's the client IP address
-// Track whether the client allowed cookies or not
-// Track the language of the client
-// Determine whether the visitor is on a desktop device or a mobile device
-// Determine the name of the browser used by the client
-// Determine the dimensions of the browser (e.g. 1792x1120 pixels)
+import UAParser from 'ua-parser-js';
 
 type browserDimensionsType = {
   width: number;

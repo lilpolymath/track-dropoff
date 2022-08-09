@@ -10,10 +10,10 @@ export type ProductProps = {
 };
 
 const Post: React.FC<{ post: ProductProps }> = ({ post }) => {
-  const authorName = post.author ? post.author.name : 'Unknown author';
   return (
     <div onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-      <h2>{post.title}</h2>
+      {JSON.stringify(post)}
+      {/* <h2>{post.title}</h2>
       <small>By {authorName}</small>
       <ReactMarkdown children={post.content} />
       <style jsx>{`
@@ -21,7 +21,7 @@ const Post: React.FC<{ post: ProductProps }> = ({ post }) => {
           color: inherit;
           padding: 2rem;
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 };

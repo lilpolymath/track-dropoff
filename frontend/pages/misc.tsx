@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import Layout from '../components/Layout';
-import Product, { ProductProps } from '../components/Product';
 
-import main from '../utils/device-tracking';
+import main, { DeviceDetails } from '../utils/device-tracking';
 import { BASE_URL, FAKESTORE_BASE_URL } from '../utils/constants';
 
 type Props = {
-  products: ProductProps[];
+  ipAddress: string;
 };
 
-const Products: React.FC<Props> = ({ products }) => {
+const Products: React.FC<Props> = ({ ipAddress }) => {
+  const [deviceDetails, setDeviceDetails] = useState<DeviceDetails>({});
+  useEffect(() => {
+    setDeviceDetails(main());
+  }, []);
+
   return (
     <Layout>
       <div className='page'>
-        <h1>Products</h1>
+        <h1>Device Tracking Details</h1>
         <main>
-          {products?.map((product) => (
-            <div key={product.id} className='product'>
-              <Product product={product} />
-            </div>
-          ))}
+          <code>{JSON.stringify({ deviceDetails, ipAddress })}</code>
         </main>
       </div>
       <style jsx>{`
@@ -43,11 +43,11 @@ const Products: React.FC<Props> = ({ products }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`${FAKESTORE_BASE_URL}/products/`);
-  const products = await res.json();
+  const getIPAddress = await fetch(`${BASE_URL}/ip-address`);
+  const address = await getIPAddress.json();
 
   return {
-    props: { products },
+    props: { products, ipAddress: address.ipAddress },
   };
 };
 
