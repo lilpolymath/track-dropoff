@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Layout from '../components/Layout';
 import Product, { ProductProps } from '../components/Product';
+import main from '../utils/device-tracking';
+import { BASE_URL } from '../utils/contants';
 
 type Props = {
   products: ProductProps[];
+  ipAddress: string;
 };
 
-const Products: React.FC<Props> = ({ products }) => {
+const Products: React.FC<Props> = ({ products, ipAddress }) => {
+  useEffect(() => {
+    const deviceDetails = main();
+
+    console.log({ deviceDetails, ipAddress });
+  }, []);
+
   return (
     <Layout>
       <div className='page'>
@@ -39,10 +48,14 @@ const Products: React.FC<Props> = ({ products }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3001/products');
+  const res = await fetch(`${BASE_URL}/products`);
   const products = await res.json();
+
+  const getIPAddress = await fetch(`${BASE_URL}/ip-address`);
+  const address = await getIPAddress.json();
+
   return {
-    props: { products },
+    props: { products, ipAddress: address.ipAddress },
   };
 };
 

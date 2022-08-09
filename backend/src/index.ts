@@ -20,7 +20,7 @@ app.get('/products', async (req, res) => {
   res.json([]);
 });
 
-app.get('/ip', async (req, res) => {
+app.get('/ip-address', async (req, res) => {
   res.json({ ipAddress: req.ip });
 });
 
